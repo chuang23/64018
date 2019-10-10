@@ -1,0 +1,8 @@
+library(lpSolveAPI)
+setwd("~/Desktop/Quant Management/HW5")
+lp<-read.lp("chuang23_5_2.lp")
+solve(lp)
+get.objective(lp)
+get.variables(lp)
+
+
