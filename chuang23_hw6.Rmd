@@ -1,0 +1,96 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(lpSolveAPI)
+library(ucminf)
+library(Benchmarking)
+```
+
+
+```{r}
+setwd("~/Desktop/Quant Management/HW6")
+Health_Care_Association <- read.lp("HW6.lp")
+solve(Health_Care_Association)
+Health_Care_Association
+get.objective(Health_Care_Association)
+get.variables(Health_Care_Association)
+```
+```{r}
+x <- matrix(c(150,400,320,520,350,320,0.2,0.7,1.2,2,1.2,0.7),ncol = 2)
+y <- matrix(c(14000,14000,42000,28000,19000,14000,3500,21000,10500,42000,25000,15000),ncol = 2)
+colnames(x) <- c("Staff_Hours","Supplies")
+colnames(y) <- c("Reimbursed","Private_Paid")
+x
+y
+```
+```{r}
+FDH <- dea(x,y,RTS = "fdh")            
+FDH
+peers(FDH)                            
+lambda(FDH)
+```
+
+
+```{r}
+CRS <- dea(x,y,RTS = "crs")            
+CRS
+peers(CRS)                            
+lambda(CRS)
+```
+
+
+```{r}
+VRS <- dea(x,y,RTS = "vrs")          
+VRS
+peers(VRS)                            
+lambda(VRS)
+```
+
+
+```{r}
+IRS <- dea(x,y,RTS = "irs")           
+IRS
+peers(IRS)                             
+lambda(IRS)
+```
+
+
+```{r}
+DRS <- dea(x,y,RTS = "drs")           
+DRS
+peers(DRS)                             
+lambda(DRS)
+```
+
+
+```{r}
+FRH <- dea(x,y,RTS = "add")     
+FRH
+peers(FRH)                           
+lambda(FRH)
+```
+```{r}
+#HW6, Part 2
+#1)
+#y1p - y1m = 6x1 + 4x2 + 5x3 - 50;
+#y2p - y2m = 8x1 + 7x2 + 5x3 - 75;
+
+#2)
+#MaxZ = 20x1 + 15x2 + 25x3 - 6y1p - 6y1m - 3y2m;
+
+#3)
+#max: 20x1 + 15x2 + 25x3 - 6y1p + 6y1m + 3y2m;
+#6x1 + 4x2 + 5x3 + y1m - y1p = 50;
+#8x1 + 7x2 + 5x3 + y2m - y2p = 75;
+
+```
+
